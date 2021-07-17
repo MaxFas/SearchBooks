@@ -1,0 +1,13 @@
+.container {
+    width: 100%;
+}
+
+.container img {
+    width: 200px;
+    margin: 15px;
+}
+
+.commonInformation {
+    font-size: 18px;
+    margin: 0 15px 15px;
+}
