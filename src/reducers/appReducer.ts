@@ -183,7 +183,7 @@ export const sortingByCategoriesBooksTC = (
   let currentSelect = select
 
   if (select === 'all') {
-    currentSelect = "art+biography+computers+history+medical+poetry"
+    currentSelect = ""
   }
   appAPI.sortByCategoriesBooks(currentSelect)
     .then(res => {

@@ -1,5 +1,10 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
-import {searchBookTC, sortingByCategoriesBooksTC, sortingByOrderBooksTC} from "../../reducers/appReducer";
+import {
+    searchBookTC,
+    sortError,
+    sortingByCategoriesBooksTC,
+    sortingByOrderBooksTC
+} from "../../reducers/appReducer";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "./SearchingPanel.module.css";
 import backgroundImg from "../../assets/imges/background.jpg";
@@ -20,7 +25,7 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch()
-    const sortError = useSelector<AppRootStateType, boolean>(
+    const error = useSelector<AppRootStateType, boolean>(
       (state) => state.app.error)
 
     const getBooks = () => {
@@ -38,7 +43,9 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
         setNameBook(e.currentTarget.value)
     }
 
-
+    const onBlurHandler = () => {
+        dispatch(sortError(false))
+    }
 
     const selectorByOrderHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         const select = e.currentTarget.value
@@ -75,11 +82,11 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
                 <option value="poetry">poetry</option>
             </select>
                 <b>Sorting by</b>
-                <select onChange={selectorByOrderHandler} className={styles.selectors}>
+                <select onChange={selectorByOrderHandler} onBlur={onBlurHandler} className={styles.selectors}>
                 <option value="relevance">relevance</option>
                 <option value="newest">newest</option>
             </select>
-                {sortError&&<div><b style={{color:"red"}}>PLEASE ENTER THE TITLE OF THE BOOK</b></div>}
+                {error&&<div><b style={{color:"red"}}>PLEASE ENTER THE TITLE OF THE BOOK</b></div>}
             </div>
         </div>
     )
