@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {
-    searchBookTC,
+    searchBookTC, searchIsFailed,
     sortError,
     sortingByCategoriesBooksTC,
     sortingByOrderBooksTC
@@ -25,8 +25,10 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
 
     const history = useHistory();
     const dispatch = useDispatch()
-    const error = useSelector<AppRootStateType, boolean>(
+    const sortErr = useSelector<AppRootStateType, boolean>(
       (state) => state.app.error)
+    const inputErr = useSelector<AppRootStateType, boolean>(
+      (state) => state.app.searchIsFailed)
 
     const getBooks = () => {
         dispatch(searchBookTC(nameBook))
@@ -43,10 +45,9 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
         setNameBook(e.currentTarget.value)
     }
 
-    const onBlurHandler = () => {
+    const onSelectBlurHandler = () => {
         dispatch(sortError(false))
     }
-
     const selectorByOrderHandler = (e: ChangeEvent<HTMLSelectElement>) => {
         const select = e.currentTarget.value
         dispatch(sortingByOrderBooksTC(nameBook, select))
@@ -82,11 +83,12 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
                 <option value="poetry">poetry</option>
             </select>
                 <b>Sorting by</b>
-                <select onChange={selectorByOrderHandler} onBlur={onBlurHandler} className={styles.selectors}>
+                <select onChange={selectorByOrderHandler} onBlur={onSelectBlurHandler} className={styles.selectors}>
                 <option value="relevance">relevance</option>
                 <option value="newest">newest</option>
             </select>
-                {error&&<div><b style={{color:"red"}}>PLEASE ENTER THE TITLE OF THE BOOK</b></div>}
+                {sortErr&&<div><b style={{color:"red"}}>PLEASE ENTER THE TITLE OF THE BOOK</b></div>}
+                {inputErr&&<div><b style={{color:"red"}}>PLEASE ENTER THE CORRECT BOOK OR BOOK IS NOT FOUND</b></div>}
             </div>
         </div>
     )
