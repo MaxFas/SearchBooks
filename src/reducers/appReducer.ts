@@ -167,12 +167,13 @@ export const searchBookTC = (title: string) => (
     .then(res => {
       dispatch(searchBooks(res.data.items, res.data.totalItems, title))
       dispatch(sortError(false))
+      dispatch(isLoading(false))
     })
     .catch(() => {
       dispatch(searchIsFailed(true))
       dispatch(sortError(false))
+      dispatch(isLoading(false))
     })
-  dispatch(isLoading(false))
 }
 
 export const sortingByOrderBooksTC = (
@@ -190,12 +191,13 @@ export const sortingByOrderBooksTC = (
     .then(res => {
       dispatch(sortingByOrderBooks(res.data.items, res.data.totalItems))
       dispatch(sortError(false))
+      dispatch(isLoading(false))
     })
     .catch(() => {
       dispatch(sortError(true))
+      dispatch(isLoading(false))
     })
   dispatch(searchIsFailed(false))
-  dispatch(isLoading(false))
 }
 export const sortingByCategoriesBooksTC = (
   select: string) => (dispatch: Dispatch) => {
@@ -208,9 +210,9 @@ export const sortingByCategoriesBooksTC = (
   appAPI.sortByCategoriesBooks(currentSelect)
     .then(res => {
       dispatch(sortingByCategoriesBooks(res.data.items, res.data.totalItems))
+      dispatch(isLoading(false))
     })
   dispatch(sortError(false))
-  dispatch(isLoading(false))
   dispatch(searchIsFailed(false))
 }
 
