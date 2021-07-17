@@ -51,8 +51,6 @@ export const SearchingPanel: React.FC<SearchingPanelType> = (props) => {
         dispatch(sortingByCategoriesBooksTC(select))
     }
 
-
-
     return (
         <div className={styles.container} style={background}>
             <h1>Search for books</h1>

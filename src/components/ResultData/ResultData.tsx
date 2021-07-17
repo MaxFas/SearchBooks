@@ -10,6 +10,7 @@ import {
   addBooksTC,
   sortingByCategoriesBooksTC
 } from "../../reducers/appReducer";
+import {Preloader} from "../../assets/common/Preloader/Preloader";
 
 export type ResultDataType = {
   nameBook: string
@@ -19,8 +20,13 @@ export type ResultDataType = {
 export const ResultData: React.FC<ResultDataType> = (props) => {
   const {nameBook, select} = props
 
-  const arrBooks = useSelector<AppRootStateType, Array<BookDataType>>((state) => state.app.items)
-  const totalCount = useSelector<AppRootStateType, number>((state) => state.app.totalItems)
+  const arrBooks = useSelector<AppRootStateType, Array<BookDataType>>(
+    (state) => state.app.items)
+  const totalCount = useSelector<AppRootStateType, number>(
+    (state) => state.app.totalItems)
+  const isLoading = useSelector<AppRootStateType, boolean>(
+    (state) => state.app.isLoading)
+
   const dispatch = useDispatch()
 
   const onClickHandler = () => {
@@ -53,6 +59,10 @@ export const ResultData: React.FC<ResultDataType> = (props) => {
   useEffect(() => {
     dispatch(sortingByCategoriesBooksTC('all'))
   }, [dispatch])
+
+  if(isLoading) {
+    return <Preloader/>
+  }
 
   return (
     <div className={styles.main}>

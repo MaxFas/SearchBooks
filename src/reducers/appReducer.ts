@@ -8,8 +8,8 @@ const initialState = {
   totalItems: 0,
   searchTitle: '',
   error: false,
-  nameBooK: ''
-} as BooksType & { searchTitle: string, error: boolean, nameBooK: string }
+  isLoading: false
+} as BooksType & { searchTitle: string, error: boolean, isLoading: boolean }
 
 
 export const appReducer = (state = initialState, action: ActionType) => {
@@ -32,6 +32,7 @@ export const appReducer = (state = initialState, action: ActionType) => {
       copyState.items = [...copyState.items, ...action.booksData]
       copyState.items = uniqueArr(copyState)
       copyState.totalItems = action.totalItems
+      console.log(copyState)
       return copyState
     }
     case "App-reducer/addBooksByCategories": {
@@ -65,6 +66,9 @@ export const appReducer = (state = initialState, action: ActionType) => {
     }
     case "App-reducer/sortError": {
       return {...state, error: action.error}
+    }
+    case "App-reducer/isLoading": {
+      return {...state, isLoading: action.isLoading}
     }
 
     default:
@@ -104,7 +108,10 @@ export const sortingByCategoriesBooks = (
   }) as const
 
 export const sortError = (error: boolean) =>
-  ({type: 'App-reducer/sortError', error: error}) as const
+  ({type: 'App-reducer/sortError', error}) as const
+
+export const isLoading = (isLoading: boolean) =>
+  ({type: 'App-reducer/isLoading', isLoading}) as const
 
 
 
@@ -121,7 +128,6 @@ export const addBooksTC = (title: string) => (
 export const addBooksByCategoriesTC = (
   select: string) => (dispatch: Dispatch, getState: ()=> AppRootStateType) => {
   const index = getState().app.items.length
-  console.log(index)
   appAPI.getMoreBookByCategory(select, index)
     .then(res => {
       dispatch(addBooksByCategories(res.data.items, res.data.totalItems))
@@ -133,6 +139,7 @@ export const searchBookTC = (title: string) => (
   dispatch: Dispatch,
   getState: () => AppRootStateType
 ) => {
+  dispatch(isLoading(true))
   const searchedTitle = getState().app.searchTitle
   let index = getState().app.items.length
 
@@ -144,11 +151,13 @@ export const searchBookTC = (title: string) => (
     .then(res => {
       dispatch(searchBooks(res.data.items, res.data.totalItems, title))
       dispatch(sortError(false))
+      dispatch(isLoading(false))
     })
 }
 
 export const sortingByOrderBooksTC = (
   title: string, select: string) => (dispatch: Dispatch) => {
+  dispatch(isLoading(true))
   let sort = ''
   if (select === 'relevance') {
     sort = '&orderBy=relevance'
@@ -165,9 +174,12 @@ export const sortingByOrderBooksTC = (
     .catch(() => {
       dispatch(sortError(true))
     })
+
+  dispatch(isLoading(false))
 }
 export const sortingByCategoriesBooksTC = (
   select: string) => (dispatch: Dispatch) => {
+  dispatch(isLoading(true))
   let currentSelect = select
 
   if (select === 'all') {
@@ -177,6 +189,7 @@ export const sortingByCategoriesBooksTC = (
     .then(res => {
       dispatch(sortingByCategoriesBooks(res.data.items, res.data.totalItems))
       dispatch(sortError(false))
+      dispatch(isLoading(false))
     })
 }
 
@@ -191,3 +204,4 @@ export type ActionType =
   |
   ReturnType<typeof sortError>
   | ReturnType<typeof addBooksByCategories>
+  | ReturnType<typeof isLoading>
