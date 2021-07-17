@@ -1,6 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import {
-    searchBookTC, searchIsFailed,
+    searchBookTC,
     sortError,
     sortingByCategoriesBooksTC,
     sortingByOrderBooksTC
