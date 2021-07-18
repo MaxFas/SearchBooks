@@ -5,7 +5,8 @@ import {addBooks, appReducer} from "../reducers/appReducer";
 test('add the new books', () => {
 
 
-  const startState: BooksType&{searchTitle: string, error: boolean, isLoading: boolean, searchIsFailed: boolean} =  {
+  const startState: BooksType&{searchTitle: string, error: boolean,
+    isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test",
     error: true,
     isLoading: true,
@@ -103,7 +104,8 @@ test('add the new books', () => {
         textSnippet: "test",
       }}]
   }
-  const newData: BooksType&{searchTitle: string, error: boolean, isLoading: boolean, searchIsFailed: boolean} =  {
+  const newData: BooksType&{searchTitle: string, error: boolean,
+    isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test1",
     error: true,
     isLoading: true,
@@ -214,9 +216,11 @@ test('filter books with the same ID', () => {
   const someID = 'test'
   const someID_2 = 'test'
 
-  const startState: BooksType&{searchTitle: string, error: boolean, isLoading: boolean} =  {
+  const startState: BooksType&{searchTitle: string, error: boolean,
+    isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test",
     error: true,
+    searchIsFailed: true,
     isLoading: true,
     kind: 'test',
     totalItems: 0,
@@ -311,9 +315,11 @@ test('filter books with the same ID', () => {
         textSnippet: "test",
       }}]
   }
-  const newData: BooksType&{searchTitle: string, error: boolean, isLoading: boolean} =  {
+  const newData: BooksType&{searchTitle: string, error: boolean,
+    isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test1",
     error: true,
+    searchIsFailed: true,
     isLoading: true,
     kind: 'test',
     totalItems: 1,
