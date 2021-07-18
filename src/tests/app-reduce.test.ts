@@ -5,12 +5,13 @@ import {addBooks, appReducer} from "../reducers/appReducer";
 test('add the new books', () => {
 
 
-  const startState: BooksType&{searchTitle: string, error: boolean, isLoading: boolean} =  {
+  const startState: BooksType&{searchTitle: string, error: boolean, isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test",
     error: true,
     isLoading: true,
     kind: 'test',
     totalItems: 0,
+    searchIsFailed: true,
     items: [{
       kind: "test",
       id: "testFirst",
@@ -102,12 +103,13 @@ test('add the new books', () => {
         textSnippet: "test",
       }}]
   }
-  const newData: BooksType&{searchTitle: string, error: boolean, isLoading: boolean} =  {
+  const newData: BooksType&{searchTitle: string, error: boolean, isLoading: boolean, searchIsFailed: boolean} =  {
     searchTitle: "test1",
     error: true,
     isLoading: true,
     kind: 'test',
     totalItems: 1,
+    searchIsFailed: true,
     items: [{
       kind: "test",
       id: "test",
