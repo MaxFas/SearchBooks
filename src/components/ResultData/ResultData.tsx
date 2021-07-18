@@ -46,11 +46,15 @@ export const ResultData: React.FC<ResultDataType> = (props) => {
       </NavLink>
 
       <div className={styles.text}>
-        <div><b>Title: </b>{b.volumeInfo.title ? b.volumeInfo.title : ''}</div>
-        <div><b>Authors: </b>{b.volumeInfo.authors ? b.volumeInfo.authors : ''}
+        <div>{b.volumeInfo.title?
+          <div><b>Title: </b>{b.volumeInfo.title}</div> : ''}
+        </div>
+        <div>{b.volumeInfo.authors?
+          <div><b>Authors: </b>{b.volumeInfo.authors}</div> : ''}
         </div>
         <div>
-          <b>Categories: </b>{b.volumeInfo.categories ? b.volumeInfo.categories[0] : ''}
+          {b.volumeInfo.categories?
+            <div><b>Categories: </b>{b.volumeInfo.categories[0]}</div> : ''}
         </div>
       </div>
     </div>
