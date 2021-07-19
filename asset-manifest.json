@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/SearchBooks/static/css/main.b1d2648b.chunk.css",
-    "main.js": "/SearchBooks/static/js/main.c6d3d433.chunk.js",
-    "main.js.map": "/SearchBooks/static/js/main.c6d3d433.chunk.js.map",
+    "main.js": "/SearchBooks/static/js/main.eb952af1.chunk.js",
+    "main.js.map": "/SearchBooks/static/js/main.eb952af1.chunk.js.map",
     "runtime-main.js": "/SearchBooks/static/js/runtime-main.6d9fd9b8.js",
     "runtime-main.js.map": "/SearchBooks/static/js/runtime-main.6d9fd9b8.js.map",
     "static/js/2.cafa7da2.chunk.js": "/SearchBooks/static/js/2.cafa7da2.chunk.js",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.6d9fd9b8.js",
     "static/js/2.cafa7da2.chunk.js",
     "static/css/main.b1d2648b.chunk.css",
-    "static/js/main.c6d3d433.chunk.js"
+    "static/js/main.eb952af1.chunk.js"
   ]
 }
