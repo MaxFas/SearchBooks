@@ -18,7 +18,7 @@ const initialState = {
 
 export const appReducer = (state = initialState, action: ActionType) => {
 
-  const uniqueArr = (copyState: BooksType & { searchTitle: string, error: boolean }) => {
+  const uniqueArr = (copyState: BooksType ) => {
     const resArr: Array<BookDataType> = [];
     copyState.items.filter(item => {
       const i = resArr.findIndex(x => (x.id === item.id));

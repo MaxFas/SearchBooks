@@ -26,6 +26,11 @@ function App() {
           />
           <Route
             exact
+            path={'/searchBooks'}
+            render={() => <Redirect to={"/books"}/>}
+          />
+          <Route
+            exact
             path={'/books'}
             render={() => <ResultData select={select} nameBook={nameBook}/>}
           />
